@@ -1,0 +1,76 @@
+import React from 'react';
+import {useState, useEffect} from 'react';
+import Skeleton from 'react-loading-skeleton';
+import useUser from '../../hooks/use-user';
+import { isUserFollowing, toggleFollow } from '../../services/firebase';
+
+function Header({photosCount, profile: { username: profileUsername, docId: profileDocId, userId: profileUserId, fullName, following, followers}, followerCount, setFollowerCount}) {
+  const {user} = useUser();
+
+  const [isFollowingProfile, setIsFollowingProfile] = useState(false)
+  const activeBtnFollow = user?.username && user?.username !== profileUsername;
+  const handleToggleFollow = async () => {
+    setIsFollowingProfile((isFollowingProfile) => !isFollowingProfile)
+    setFollowerCount({
+      followerCount: isFollowingProfile ? followerCount - 1 : followerCount + 1
+    })
+    await toggleFollow(isFollowingProfile, user.docId, profileDocId, profileUserId, user.userId);
+
+  }
+  useEffect(() => {
+    console.log('follower count', followerCount)
+    const isLoggedInUserFollowingProfile = async() => {
+      const isFollowing = await isUserFollowing(user.username, profileUserId)
+      setIsFollowingProfile(isFollowing)
+
+    }
+    if(user.username && profileUserId) {
+      isLoggedInUserFollowingProfile()
+
+    }
+  }, [user.username, profileUserId])
+  return <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg'>
+    <div className='container flex justify-center'>
+      <img className='rounded-full h-40 w-40 flex' src={`/images/avatars/${profileUsername}.jpg`}></img>
+
+    </div>
+    <div className='flex items-center justify-center flex-col col-span-2'>
+      <div className='container flex items-center'>
+        <p className='text-2xl mr-4'>{profileUsername}</p>
+        {
+          activeBtnFollow && (
+            <button className='bg-blue-medium font-bold text-sm rounded text-white w-20 h-8' onClick={handleToggleFollow} type="button">{isFollowingProfile ? 'Unfollow': 'Follow'}</button>
+          )
+        }
+
+      </div>
+      <div className='container flex mt-4'>
+        {
+          !followers && !following ? (
+            <Skeleton count={1} width={677} height={24}></Skeleton>
+          ) : (
+            <>
+             <p className="mr-10">
+                <span className="font-bold">{photosCount}</span> photos
+              </p>
+              <p className="mr-10">
+                <span className="font-bold">{followerCount}</span>
+                {` `}
+                {followerCount === 1 ? `follower` : `followers`}
+              </p>
+              <p className="mr-10">
+                <span className="font-bold">{following?.length}</span> following
+              </p>
+            </>
+          )
+        }
+      </div>
+      <div className="container mt-4">
+          <p className="font-medium">{!fullName ? <Skeleton count={1} height={24} /> : fullName}</p>
+        </div>
+
+    </div>
+  </div>
+}
+
+export default Header;
