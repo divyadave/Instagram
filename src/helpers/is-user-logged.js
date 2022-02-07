@@ -1,7 +1,7 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { Route } from 'react-router-dom';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom.min';
-import * as ROUTES from '../constants/routes';
+
 
 function IsUserLoggedIn({user, loggedInPath, children, ...rest}) {
   return (

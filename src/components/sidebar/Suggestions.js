@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import propTypes from 'prop-types';
 import Skeleton from 'react-loading-skeleton';
 import { getSuggestedProfiles } from '../../services/firebase';
 import SuggestedProfile from './SuggestedProfile';
@@ -18,7 +17,7 @@ function Suggestions({userId, following, loggedInDocId}) {
       getProfiles();
       }
 
-  }, [userId])
+  }, [userId, following])
 
   return (
       !profiles ? (

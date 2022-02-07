@@ -11,7 +11,6 @@ import IsUserLoggedIn from "./helpers/is-user-logged";
  const Login = lazy(() => import('./pages/Login'))
   const SignUp = lazy(() => import('./pages/Signup'))
   const notFound = lazy(() => import('./pages/NotFound'))
-  const dashboard = lazy(() => import('./pages/Dashboard'))
   const Profile = lazy(() => import('./components/profile/Profile'))
 
 

@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import propTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import Skeleton from 'react-loading-skeleton';
@@ -13,7 +13,7 @@ function User({username, fullName}) {
       ) : (
           <Link to={`/p/${username}`} className='grid grid-cols-4 gap-4 mb-6 items-center'>
               <div className='flex items-center justify-between col-span-1'>
-                  <img src="/images/avatars/karl.jpg" className='rounded-full w-full mr-3' />
+                  <img src="/images/avatars/karl.jpg" alt="karl" className='rounded-full w-full mr-3' />
 
               </div>
               <div className='col-span-3'>

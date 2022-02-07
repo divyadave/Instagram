@@ -14,7 +14,7 @@ function SuggestedProfile({profileDocId, username, profileId, userId, loggedInDo
   return !followed ? (
       <div className='flex flex-row items-center align-items justify-between mb-2'>
           <div className='flex items-center justify-between'>
-              <img src={`/images/avatars/${username}.jpg`} className='rounded-full w-8 mr-3 flex' />
+              <img src={`/images/avatars/${username}.jpg`} alt={username} className='rounded-full w-8 mr-3 flex' />
               <Link to={`/p/${username}`}>
                   <p className='font-bold text-sm'>{username}</p>
               </Link>

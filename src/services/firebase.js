@@ -36,7 +36,7 @@ export async function getSuggestedProfiles(userId, following) {
             docId: item.id
         }
 
-    )).filter((profile) => profile.userId != userId && !following.includes(profile.userId))
+    )).filter((profile) => profile.userId !== userId && !following.includes(profile.userId))
 
     return suggestedData
     
@@ -44,7 +44,7 @@ export async function getSuggestedProfiles(userId, following) {
 
 export async function updateLoggedInUserFollowing(loggedInDocId, profileId, isFollowingProfile) {
     
-    const result = await firebase
+     await firebase
     .firestore()
     .collection('users')
     .doc(loggedInDocId)
@@ -56,7 +56,7 @@ export async function updateLoggedInUserFollowing(loggedInDocId, profileId, isFo
 }
 export async function updateFollowingFollwers(loggedInDocId, profileDocId, isFollowingProfile) {
     
-    const result = await firebase
+     await firebase
     .firestore()
     .collection('users')
     .doc(profileDocId)

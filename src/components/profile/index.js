@@ -1,5 +1,5 @@
 import { useReducer, useEffect } from "react";
-import { getUserNameExists, getUserPhotosByUsername } from "../../services/firebase";
+import { getUserPhotosByUsername } from "../../services/firebase";
 import Header from "./Header";
 import Photos from "./Photos";
 
@@ -23,7 +23,7 @@ export default function UserProfile ({user}) {
             getProfileInfoAndPhotos();
         }
        
-    }, [user.username])
+    }, [user, user.username])
 
     return (
         <div>

@@ -38,7 +38,7 @@ function Header() {
 </svg></button>
 <div className="flex items-center cursor-pointer">
 <Link to={`/p/${user.username}`}>
-<img className="rounded-full h-8 w-8 flex" src={`/images/avatars/${user.displayName}.jpg`} />
+<img className="rounded-full h-8 w-8 flex" src={`/images/avatars/${user.displayName}.jpg`} alt={user.username} />
 </Link>
 </div>
               </>

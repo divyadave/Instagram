@@ -1,4 +1,4 @@
-import react, {useState, useEffect, useContext} from "react";
+import {useState, useEffect, useContext} from "react";
 import userContext from "../context/user";
 import { getUserId } from "../services/firebase";
 import { getPhotos } from '../services/firebase'
@@ -22,7 +22,7 @@ export default function usePhotos() {
         getTimelinePhotos();
         
        
-    }, [])
+    }, [userId])
 
     return {photos}
 }

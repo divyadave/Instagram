@@ -18,7 +18,6 @@ function Header({photosCount, profile: { username: profileUsername, docId: profi
 
   }
   useEffect(() => {
-    console.log('follower count', followerCount)
     const isLoggedInUserFollowingProfile = async() => {
       const isFollowing = await isUserFollowing(user.username, profileUserId)
       setIsFollowingProfile(isFollowing)
@@ -29,9 +28,10 @@ function Header({photosCount, profile: { username: profileUsername, docId: profi
 
     }
   }, [user.username, profileUserId])
+
   return <div className='grid grid-cols-3 gap-4 justify-between mx-auto max-w-screen-lg'>
     <div className='container flex justify-center'>
-      <img className='rounded-full h-40 w-40 flex' src={`/images/avatars/${profileUsername}.jpg`}></img>
+      <img className='rounded-full h-40 w-40 flex' src={`/images/avatars/${profileUsername}.jpg`} alt={profileUsername}></img>
 
     </div>
     <div className='flex items-center justify-center flex-col col-span-2'>
